@@ -1,151 +1,129 @@
+#PRIMERO IMPORTAMOS LAS LIBRERIAS A USAR
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 
-# App configuration
-st.set_page_config(page_title="Mi primera app", page_icon=":tada", layout="centered")
+#---------------------------------------------------------------------------
 
-# Custom CSS
-st.markdown("""
-    <style>
-    /* Main container */
-    .main {
-        padding: 2rem;
-        background-color: #f8f9fa;
-    }
-    
-    /* Headers */
-    .css-10trblm {
-        color: #1f2937;
-        font-family: 'Helvetica Neue', sans-serif;
-        margin-bottom: 1.5rem;
-    }
-    
-    /* Sidebar */
-    .css-1d391kg {
-        background-color: #ffffff;
-        padding: 2rem;
-        border-right: 1px solid #e5e7eb;
-    }
-    
-    /* Tabs */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 2rem;
-        background-color: #ffffff;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background-color: transparent;
-        color: #4b5563;
-        border-radius: 0.25rem;
-        padding: 0.5rem 1rem;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background-color: #3b82f6;
-        color: white;
-    }
-    
-    /* Cards for columns */
-    .stColumn {
-        background-color: white;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        margin: 0.5rem;
-    }
-    
-    /* Dataframe styling */
-    .dataframe {
-        border: none;
-        background-color: white;
-        border-radius: 0.5rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    
-    /* Alert boxes */
-    .stAlert {
-        border-radius: 0.5rem;
-        border: none;
-    }
-    </style>
-""", unsafe_allow_html=True)
+#SETUP DE LA APP 
+# De layout podemos usar wide or centered
+st.set_page_config(page_title="Mi primera app", page_icon=":tada:", layout="centered")
 
-# Sidebar
-with st.sidebar:
+
+#---------------------------------------------------------------------------
+#sidebars
+st.sidebar.image("https://www.streamlit.io/images/brand/streamlit-mark-color.png",  width=200)
+st.sidebar.title("empresa x") # Titulo de la sidebar
+st.sidebar.text("Hola mundo") # Texto normal
+
+#---------------------------------------------------------------------------
+#Columnas
+col1, col2, col3 = st.columns(3) # 3 columnas
+
+with col1:
     st.image("https://www.streamlit.io/images/brand/streamlit-mark-color.png", caption="Streamlit", width=200)
-    st.markdown("### Dashboard")
-    st.text("Bienvenido a la aplicación")
 
-# Tabs
-tab1, tab2, tab3 = st.tabs(["📝 Textos", "🎯 Medios", "📊 Datos"])
+with col2:
+    st.image("https://www.streamlit.io/images/brand/streamlit-mark-color.png", caption="Streamlit", width=200)
+
+
+with col3:
+    st.image("https://www.streamlit.io/images/brand/streamlit-mark-color.png", caption="Streamlit", width=200)
+
+#---------------------------------------------------------------------------
+#pestañas
+
+tab1, tab2, tab3 = st.tabs(["textos", "medios y recursos", "dataframe"])
 
 with tab1:
-    st.markdown("<h1 style='text-align: center;'>Mi primera app</h1>", unsafe_allow_html=True)
-    
-    with st.container():
-        st.header("Encabezado 1")
-        st.subheader("Encabezado 2")
-        st.markdown("---")
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown("### Texto y código")
-            st.markdown("Hola **mundo**")
-            st.code("print('Hola mundo')", language='python')
-            
-        with col2:
-            st.markdown("### Matemáticas")
-            st.latex(r"""a^2 + b^2 = c^2""")
-    
-    # Alerts in a more organized way
-    with st.container():
-        st.markdown("### Alertas")
-        cols = st.columns(2)
-        with cols[0]:
-            st.info("Información importante")
-            st.success("Operación exitosa")
-        with cols[1]:
-            st.warning("Precaución")
-            st.error("Error detectado")
+
+    #TEXTOS
+    st.title("Mi primera app") # Titulo principal
+
+    #Encabezados 
+    st.header("Encabezado 1") # Encabezado 1
+    st.subheader("Encabezado 2") # Encabezado 2
+
+    #texto normal 
+    st.text("Hola mundo") # Texto normal
+
+    #markdown
+    st.markdown("Hola **mundo**") # Texto en markdown
+
+    #latex
+    st.latex(r"""a^2 + b^2 = c^2""") # Texto en latex
+
+    #code 
+    st.code("print('Hola mundo')", language="python") # Texto en code
+
+    #Informacion, advertencias y errores
+    st.info("Esto es una info") # Info
+    st.success("Esto es un success") # Success
+    st.warning("Esto es un warning") # Warning
+    st.error("Esto es un error") # Error
+    st.exception("Esto es una exception") # Exception
+
 
 with tab2:
-    st.markdown("<h2 style='text-align: center;'>Recursos multimedia</h2>", unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.image("https://www.streamlit.io/images/brand/streamlit-mark-color.png", 
-                caption="Streamlit", 
-                use_column_width=True)
-    with col2:
-        st.video("https://www.youtube.com/watch?v=2Vv-BfVoq4g")
+    # Medios y recursos
+    # Imagenes (la ruta puede ser local o una url)
+    st.image("https://www.streamlit.io/images/brand/streamlit-mark-color.png", caption="Streamlit", width=200)
+
+    #audios
+    st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", format="audio/mp3") # Audio
+
+    #videos
+    st.video("https://www.youtube.com/watch?v=2Vv-BfVoq4g") # Video
+
 
 with tab3:
-    st.markdown("<h2 style='text-align: center;'>Análisis de datos</h2>", unsafe_allow_html=True)
-    
+
+    #Dataframe ejemplo
     df = pd.DataFrame({
-        "col1": [1,2,3,4],
-        "col2": [5,6,7,8],
-        "col3": [8,10,11,12]
+        "col1": [1, 2, 3, 4],
+        "col2": [5, 6, 7, 8],
+        "col3": [9, 10, 11, 12]
     })
-    
-    st.dataframe(df.style.highlight_max(axis=0))
 
-# Footer
-st.markdown("""
-    <div style='text-align: center; padding: 1rem; margin-top: 2rem; border-top: 1px solid #e5e7eb;'>
-        <p style='color: #6b7280;'>Desarrollado con ❤️ usando Streamlit</p>
-    </div>
-""", unsafe_allow_html=True)
+    st.dataframe(df) # Dataframe
 
-# Añadir filtros interactivos
-st.markdown("### Filtros")
-col_filter1, col_filter2 = st.columns(2)
-with col_filter1:
-    producto_filter = st.multiselect("Seleccionar productos", options=df["Producto"].tolist(), default=df["Producto"].tolist())
-with col_filter2:
-    min_ventas = st.slider("Ventas mínimas", 0, 2000, 500)
+#---------------------------------------------------------------------------
+# Sessions states son variables que se mantienen en la sesion
+# Se pueden usar para guardar datos entre sesiones
+
+#crear contador en estado de sesion
+if 'contador' not in st.session_state:
+    st.session_state.contador = 0
+
+#funciones auxiliares para incrementar, decrementar y resetear el contador
+def incrementa_contador():
+    st.session_state.contador += 1
+
+def decrementa_contador():
+    st.session_state.contador -= 1
+
+def reset_contador():
+    st.session_state.contador = 0
+
+#inferfaz
+st.title("Contador")
+st.write("Contador:", st.session_state.contador) # Mostrar contador
+
+#botones para incrementar, decrementar y resetear el contador
+col1, col2, col3 = st.columns(3) # 3 columnas
+
+with col1:
+    if st.button("Incrementar"):
+        incrementa_contador() # Incrementar contador
+
+with col2:
+    if st.button("Decrementar"):
+        decrementa_contador() # Decrementar contador
+
+with col3:
+    if st.button("Resetear"):
+        reset_contador() # Resetear contador
+
+
+#---------------------------------------------------------------------------
     
 
