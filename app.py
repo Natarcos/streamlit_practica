@@ -52,4 +52,7 @@ df = pd.DataFrame({
 
 st.dataframe(df) #Dataframe
 
+st.sidebar()
+st.sidebar.tittle ("Sidebar")
+
 
