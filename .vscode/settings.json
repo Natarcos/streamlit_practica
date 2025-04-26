@@ -1,0 +1,6 @@
+{
+    "github.copilot.advanced": {
+        "python": true,
+        "markdown": true
+    }
+}
